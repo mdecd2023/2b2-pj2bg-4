@@ -148,6 +148,28 @@ img.add_border {
 <div>Ans1:</div>
 <div>
 <p><span>zmqRemoteAPI 是CoppeliaSim 軟件中使用來遠程控制和通訊的介紹面，可以讓使用者通過網絡連接到CoppeliaSim，並進行遠程操作和資料傳輸。它是基於 ZeroMQ 協議現實的，讓使用者可以透過編程的方式來控制CoppeliaSim中的機器人、傳感器和執行器等對象，並獲取仿真中的資料、修改對象屬性或執行者執行仿真腳本等操作。</span></p>
+<p><span>Q2: </span></p>
+<p>How do you establish a connection between a Python script and CoppeliaSim using zmqRemoteAPI?</p>
+<div></div>
+<div>Ans2:</div>
+<div>可以使用Python的zmqRemoteAPI來與CoppeliaSim建立連接。</div>
+<div>
+<p>以下是一個Python程式碼範例：</p>
+<pre><code class="language-python"><span class="hljs-keyword">import</span> sim
+<span class="hljs-keyword">import</span> sys
+
+sim.simxFinish(-<span class="hljs-number">1</span>) <span class="hljs-comment"># just in case, close all opened connections</span>
+clientID=sim.simxStart(<span class="hljs-string">'127.0.0.1'</span>,<span class="hljs-number">19999</span>,<span class="hljs-literal">True</span>,<span class="hljs-literal">True</span>,<span class="hljs-number">5000</span>,<span class="hljs-number">5</span>) <span class="hljs-comment"># Connect to CoppeliaSim</span>
+
+<span class="hljs-keyword">if</span> clientID!=-<span class="hljs-number">1</span>:
+    <span class="hljs-built_in">print</span> (<span class="hljs-string">'Connected to remote API server'</span>)
+<span class="hljs-keyword">else</span>:
+    <span class="hljs-built_in">print</span> (<span class="hljs-string">'Failed connecting to remote API server'</span>)
+    sys.exit(<span class="hljs-string">'Could not connect'</span>)
+
+sim.simxFinish(clientID) <span class="hljs-comment"># Close the connection<br/><br/></span></code>Q3:<br/>What are some common use cases for zmqRemoteAPI in CoppeliaSim?<br/><br/>Ans:<br/>通過Python腳本控制機器人<br/>通過Python控制感測器<br/><br/> <br/><br/></pre>
+</div>
+<div></div>
 <!-- 導入 brython 程式庫 -->
 <p>
 <script src="./../cmsimde/static/brython.js"></script>
